@@ -134,6 +134,26 @@ function addConfig(evt){
 	x4.innerHTML = d;
 	console.log("Added configuration");
 }
+function addManualConfig(mConf, read, actions, finalConf){
+	if (mConf=="" || read=="" || actions==""||finalConf==""){
+		console.log("adding config failed");
+		return;
+	}
+	machine.addBehaviour(mConf,read,actions,finalConf);
+	// add and fill new row to machine table
+	var newRow = document.getElementById("mach").insertRow(machRows+1);
+	machRows++;
+	var x1 = newRow.insertCell(0);
+	var x2 = newRow.insertCell(1);
+	var x3 = newRow.insertCell(2);
+	var x4 = newRow.insertCell(3);
+	x1.innerHTML = mConf;
+	x2.innerHTML = read;
+	x3.innerHTML = actions;
+	x4.innerHTML = finalConf;
+	console.log("Added configuration");
+
+}
 function runProgram(){
 	machine.execute();
 	machine.revealTape();
@@ -155,4 +175,18 @@ function highlightCell(num){
 }
 function printValue(cellNumber, char){
 	document.getElementById("tmCell"+cellNumber).innerHTML = char;
+}
+function loadTuring2(){
+	addManualConfig("b","#","PeRPeRP0RRP0LL","o");
+	addManualConfig("o", "1", "RPxLLL", "o");
+	addManualConfig("o", "0", "RL", "q"); //RL = explicit do-nothing
+	addManualConfig("q", "0", "RR", "q");
+	addManualConfig("q", "1", "RR", "q");
+	addManualConfig("q", "#", "P1L", "p");
+	addManualConfig("p", "x", "ER", "q");
+	addManualConfig("p", "e", "R", "f");
+	addManualConfig("p", "#", "LL", "p");
+	addManualConfig("f", "0", "RR", "f");
+	addManualConfig("f", "1", "RR", "f");
+	addManualConfig("f", "#", "P0LL", "o");
 }
