@@ -1,0 +1,41 @@
+<html>
+<head>
+<style>
+table, td, th {
+	border: 1px solid black;
+}
+#output{
+	display: flex;
+}
+</style>
+<script src="jsTM.js"></script>
+</head>
+<body>
+<input id="mConfig" type="text" />
+<input id="read" type="text" />
+<input id="actions" type="text" />
+<input id="finalMConfig" type="text" />
+<button onclick="addConfig()">Add New Configuration</button>
+<br>
+<br>
+<br>
+<h1>Machine Configuration Settings</h1>
+<table id="mach">
+	<tr>
+		<th>m-config</th>
+		<th>read</th>
+		<th>actions</th>
+		<th>final m-config</th>
+	</tr>
+</table>
+<br>
+<br>
+<button onclick="runProgram()">Run Program</button>
+<button onclick="clearTape()">Clear Tape</button>
+<br>
+<br>
+<section id="output"></section>
+</body>
+</html>
+
+
