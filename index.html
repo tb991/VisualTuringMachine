@@ -11,10 +11,20 @@ table, td, th {
 <script src="jsTM.js"></script>
 </head>
 <body>
-<input id="mConfig" type="text" />
-<input id="read" type="text" />
-<input id="actions" type="text" />
-<input id="finalMConfig" type="text" />
+<table>
+<tr>
+	<th>Machine configuration label</th>
+	<th>Scanned Tape Symbol</th>
+	<th>Action-String</th>
+	<th>Final machine configuration</th>
+</tr>
+<tr>
+	<td><input id="mConfig" type="text" /></td>
+	<td><input id="read" type="text" /></td>
+	<td><input id="actions" type="text" /></td>
+	<td><input id="finalMConfig" type="text" /></td>
+</tr>
+</table>
 <button onclick="addConfig()">Add New Configuration</button>
 <br>
 <br>

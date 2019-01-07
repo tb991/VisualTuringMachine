@@ -45,6 +45,7 @@ class TuringMachine{
 				while(i<actions.length){
 					if (actions[i]=="E"){
 						this.tape[this.tapePtr]="#";
+						printValue(this.tapePtr," ");
 					}
 					else if (actions[i]=="R"){
 						this.tapePtr++;
@@ -58,6 +59,7 @@ class TuringMachine{
 					else if(actions[i]=="P"){
 						i++;
 						this.tape[this.tapePtr] = actions[i];
+						printValue(this.tapePtr,actions[i]);
 					}
 					i++;
 				}
@@ -150,4 +152,7 @@ function highlightCell(num){
 	document.getElementById("tmCell" + parseInt(currCell)).style.border = "solid #000000";
 	document.getElementById("tmCell" + parseInt(num)).style.border = "solid #FF0000";
 	currCell = num;
+}
+function printValue(cellNumber, char){
+	document.getElementById("tmCell"+cellNumber).innerHTML = char;
 }
