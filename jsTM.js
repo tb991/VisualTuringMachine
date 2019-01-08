@@ -99,14 +99,21 @@ var machine = new TuringMachine();
 
 window.onload = function(){
 	var visTape = document.getElementById("output");
-	for (var i = 0; i < 20; i++){
+	for (var i = 0; i < 1024; i++){
 		var div = document.createElement("div");
-		div.style.border = "solid #000000";
-		div.id = "tmCell_"
+		div.style.border = "1px solid #000000";
+		div.id = "tmCell_";
 		div.id = div.id.replace("_", i);
 		div.style.width = 20;
 		div.style.height = 20;
+		div.className = "tmCell"; // for group access
 		visTape.appendChild(div);
+		if (i%80==0 && i!=0){
+			var br = document.createElement("BR");
+			var br2 = document.createElement("BR");
+			visTape.appendChild(br);
+			visTape.appendChild(br2);
+		}
 	}
 	highlightCell(0);
 }
@@ -164,13 +171,14 @@ function clearTape(){
 
 	for(var i = 0; i < machine.tapeLength; i++){
 		machine.tape[i] = '#';
+		printValue(i," ");
 	}
 }
 var currCell = 0;
 function highlightCell(num){
 	console.log(num);
-	document.getElementById("tmCell" + parseInt(currCell)).style.border = "solid #000000";
-	document.getElementById("tmCell" + parseInt(num)).style.border = "solid #FF0000";
+	document.getElementById("tmCell" + parseInt(currCell)).style.border = "1px solid #000000";
+	document.getElementById("tmCell" + parseInt(num)).style.border = "2px solid #FF0000";
 	currCell = num;
 }
 function printValue(cellNumber, char){

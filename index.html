@@ -5,7 +5,10 @@ table, td, th {
 	border: 1px solid black;
 }
 #output{
-	display: flex;
+	height: 500px;
+}
+.tmCell{
+	float: left;
 }
 </style>
 <script src="jsTM.js"></script>
@@ -40,13 +43,14 @@ table, td, th {
 </table>
 <br>
 <br>
+<button onclick="runProgram()">Run Program</button>
 <button onclick="loadTuring2()">Load Example Program</button>
 <br>
 <br>
+<h1>Tape</h1>
 <section id="output"></section>
 <br>
 <br>
-<button onclick="runProgram()">Run Program</button>
 <button onclick="clearTape()">Clear Tape</button>
 
 </body>
