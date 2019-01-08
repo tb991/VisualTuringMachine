@@ -116,6 +116,7 @@ window.onload = function(){
 		}
 	}
 	highlightCell(0);
+	asyncCall();
 }
 var machRows = 0;
 function addConfig(evt){
@@ -178,6 +179,7 @@ var currCell = 0;
 function highlightCell(num){
 	console.log(num);
 	document.getElementById("tmCell" + parseInt(currCell)).style.border = "1px solid #000000";
+
 	document.getElementById("tmCell" + parseInt(num)).style.border = "2px solid #FF0000";
 	currCell = num;
 }
@@ -197,4 +199,22 @@ function loadTuring2(){
 	addManualConfig("f", "0", "RR", "f");
 	addManualConfig("f", "1", "RR", "f");
 	addManualConfig("f", "#", "P0LL", "o");
+}
+var thing = 0;
+function resolveAfter2Seconds() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      thing++;
+	highlightCell(thing)
+      resolve('resolved');
+    }, 100);
+  });
+}
+
+async function asyncCall() {
+  console.log('calling');
+  var result = await resolveAfter2Seconds();
+  console.log(result);
+  // expected output: 'resolved'
+  asyncCall();
 }
