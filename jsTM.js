@@ -23,8 +23,7 @@ class TuringMachine{
 			console.log(this.tape[i]);
 		}
 	}
-	execute(){
-		this.progScanner = 0;
+	async execute(){
 		this.state = this.programs[this.progScanner].getState(); //
 		while(this.tapePtr < this.tapeLength){
 			//console.log(this.tape[this.tapePtr]);
@@ -49,12 +48,14 @@ class TuringMachine{
 					}
 					else if (actions[i]=="R"){
 						this.tapePtr++;
-						highlightCell(currCell+1); // NOT WORKING YET
+						await resolveAfter(currCell+1)
+						//highlightCell(currCell+1); // NOT WORKING YET
 						//console.log(this.tapePtr);
 					}
 					else if (actions[i]=="L"){
 						this.tapePtr--;
-						highlightCell(currCell-1); // NOT WORKING YET
+						await resolveAfter(currCell-1)
+						//highlightCell(currCell-1); // NOT WORKING YET
 					}
 					else if(actions[i]=="P"){
 						i++;
@@ -116,7 +117,6 @@ window.onload = function(){
 		}
 	}
 	highlightCell(0);
-	asyncCall();
 }
 var machRows = 0;
 function addConfig(evt){
@@ -177,7 +177,7 @@ function clearTape(){
 }
 var currCell = 0;
 function highlightCell(num){
-	console.log(num);
+	//console.log(num);
 	document.getElementById("tmCell" + parseInt(currCell)).style.border = "1px solid #000000";
 
 	document.getElementById("tmCell" + parseInt(num)).style.border = "2px solid #FF0000";
@@ -200,21 +200,23 @@ function loadTuring2(){
 	addManualConfig("f", "1", "RR", "f");
 	addManualConfig("f", "#", "P0LL", "o");
 }
+
 var thing = 0;
-function resolveAfter2Seconds() {
+function resolveAfter(cellNumber) {
   return new Promise(resolve => {
     setTimeout(() => {
-      thing++;
-	highlightCell(thing)
+      //thing++;
+	//thing = currCell;
+	highlightCell(cellNumber)
       resolve('resolved');
     }, 100);
   });
 }
-
 async function asyncCall() {
   console.log('calling');
   var result = await resolveAfter2Seconds();
   console.log(result);
   // expected output: 'resolved'
-  asyncCall();
+  if (thing<1)
+    asyncCall();
 }
