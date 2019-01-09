@@ -12,8 +12,14 @@ table, td, th {
 .tmCell{
 	float: left;
 }
+#sectionHolder{
+	display: grid;
+}
 </style>
 <script src="jsTM.js"></script>
+<title>
+Visual Turing Machine
+</title>
 </head>
 <body>
 <table>
@@ -50,7 +56,7 @@ table, td, th {
 <br>
 <br>
 <h1>Tape</h1>
-<section id="output"></section>
+<div id="sectionHolder"><section id="output"></section></div>
 <br>
 <br>
 <button onclick="clearTape()">Clear Tape</button>
