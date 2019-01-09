@@ -202,6 +202,7 @@ function loadTuring2(){
 }
 
 var thing = 0;
+var slownessOfTM = 0;
 function resolveAfter(cellNumber) {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -209,7 +210,7 @@ function resolveAfter(cellNumber) {
 	//thing = currCell;
 	highlightCell(cellNumber)
       resolve('resolved');
-    }, 100);
+    }, slownessOfTM);
   });
 }
 async function asyncCall() {
@@ -220,3 +221,13 @@ async function asyncCall() {
   if (thing<1)
     asyncCall();
 }
+function slow(){
+	slownessOfTM = 1000;
+}
+function medium(){
+        slownessOfTM = 100;
+}
+function fast(){
+        slownessOfTM = 0;
+}
+
