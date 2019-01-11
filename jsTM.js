@@ -34,6 +34,13 @@ class TuringMachine{
 			if (this.programs[this.progScanner].getReadCondition() == "*" && this.tape[this.tapePtr] != "#" ){
 				rightSymbolScanned = 1;
 			}
+			if (this.programs[this.progScanner].getReadCondition().length>1){
+				var cond = this.programs[this.progScanner].getReadCondition();
+				if (cond.includes("!") && cond.length==2 && cond[1] != this.tape[this.tapePtr]){
+					// assume it's a single not statement
+					rightSymbolScanned = 1;
+				}
+			}
 			var inRightState = this.state==this.programs[this.progScanner].getState();
 			var progFound = rightSymbolScanned && inRightState;
 			//break;
