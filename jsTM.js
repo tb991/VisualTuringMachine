@@ -30,17 +30,19 @@ class TuringMachine{
 			//console.log(this.programs[this.progScanner].getReadCondition());
 
 			var rightSymbolScanned = this.tape[this.tapePtr] == this.programs[this.progScanner].getReadCondition();
+			// define turing's "many" (any symbol except blank)
+			if (this.programs[this.progScanner].getReadCondition() == "*" && this.tape[this.tapePtr] != "#" ){
+				rightSymbolScanned = 1;
+			}
 			var inRightState = this.state==this.programs[this.progScanner].getState();
-			//console.log(rightSymbolScanned);
-			//console.log(inRightState);
 			var progFound = rightSymbolScanned && inRightState;
-			//console.log(progFound);
 			//break;
 			if (progFound){ //
 				//console.log("made it!");
 				var actions = this.programs[this.progScanner].getActions();
 				var i = 0;
-				//console.log(actions);
+				// program currently allows for null actions without code needed
+				// scan the specified actions for the given state
 				while(i<actions.length){
 					if (actions[i]=="E"){
 						this.tape[this.tapePtr]="#";
@@ -49,13 +51,10 @@ class TuringMachine{
 					else if (actions[i]=="R"){
 						this.tapePtr++;
 						await resolveAfter(currCell+1)
-						//highlightCell(currCell+1); // NOT WORKING YET
-						//console.log(this.tapePtr);
 					}
 					else if (actions[i]=="L"){
 						this.tapePtr--;
 						await resolveAfter(currCell-1)
-						//highlightCell(currCell-1); // NOT WORKING YET
 					}
 					else if(actions[i]=="P"){
 						i++;
@@ -143,7 +142,7 @@ function addConfig(evt){
 	console.log("Added configuration");
 }
 function addManualConfig(mConf, read, actions, finalConf){
-	if (mConf=="" || read=="" || actions==""||finalConf==""){
+	if (mConf=="" || read==""  || finalConf==""){
 		console.log("adding config failed");
 		return;
 	}
@@ -179,8 +178,10 @@ var currCell = 0;
 function highlightCell(num){
 	//console.log(num);
 	document.getElementById("tmCell" + parseInt(currCell)).style.border = "1px solid #000000";
+	document.getElementById("tmCell" + parseInt(currCell)).style.backgroundColor = "#FFFFFF";
 
-	document.getElementById("tmCell" + parseInt(num)).style.border = "2px solid #FF0000";
+	document.getElementById("tmCell" + parseInt(num)).style.border = "1px solid #FF0000";
+	document.getElementById("tmCell" + parseInt(num)).style.backgroundColor = "#999999";
 	currCell = num;
 }
 function printValue(cellNumber, char){
@@ -189,7 +190,7 @@ function printValue(cellNumber, char){
 function loadTuring2(){
 	addManualConfig("b","#","PeRPeRP0RRP0LL","o");
 	addManualConfig("o", "1", "RPxLLL", "o");
-	addManualConfig("o", "0", "RL", "q"); //RL = explicit do-nothing
+	addManualConfig("o", "0", "", "q");
 	addManualConfig("q", "0", "RR", "q");
 	addManualConfig("q", "1", "RR", "q");
 	addManualConfig("q", "#", "P1L", "p");
@@ -199,6 +200,15 @@ function loadTuring2(){
 	addManualConfig("f", "0", "RR", "f");
 	addManualConfig("f", "1", "RR", "f");
 	addManualConfig("f", "#", "P0LL", "o");
+}
+function loadBinaryCounter(){
+	addManualConfig("a", "#", "RRRRRRRRRRRRRRRRRRRR", "b");
+	addManualConfig("b","#","P0","i");
+	addManualConfig("i","0","P1","r");
+	addManualConfig("i","1","P0L","i");
+	addManualConfig("i","#","P1","r");
+	addManualConfig("r","#","L","i");
+	addManualConfig("r","*","R","r");
 }
 
 var thing = 0;
