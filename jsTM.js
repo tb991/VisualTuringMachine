@@ -13,15 +13,49 @@ class TuringMachine{
 		this.progScanner = 0;
 
 		this.state;
+
+		// added much later on in development
+		this.machRows = 0;
+		this.running = false;
 	}
 	addBehaviour(state, read, actions, finalState){
 		this.programs.push(new Configuration(state,read,actions,finalState));
-		console.log("Syntax is assumed to be correct");
+		console.log("Syntax is assumed to be correct...proglength..." + this.programs.length);
+		this.machRows++;
 	}
 	revealTape(){
 		for (var i=0; i<this.tape.length; i++){
 			console.log(this.tape[i]);
 		}
+	}
+	removeLastBehaviour(){
+		if (this.programs.length > 0){
+			this.programs.pop();
+		}
+	}
+	getNumIns(){
+		return this.machRows;
+	}
+	clearTape(){
+		this.tape = [];
+		this.tapePtr = 0;
+		
+		for(var i = 0; i < this.tapeLength; i++){
+			this.tape[i] = '#';
+			printValue(i," ");
+		}
+		
+	}
+	clearIns(){
+		while (this.machRows > 0 && document.getElementById("mach").rows.length > 1){
+			document.getElementById("mach").deleteRow(this.machRows);
+			this.removeLastBehaviour();
+			this.machRows--;
+		}
+	}
+	run(){
+		this.running = true;
+		this.execute();
 	}
 	async execute(){
 		this.state = this.programs[this.progScanner].getState(); //
@@ -124,7 +158,6 @@ window.onload = function(){
 	}
 	highlightCell(0);
 }
-var machRows = 0;
 function addConfig(evt){
 	var a =	document.getElementById("mConfig").value;
 	var b = document.getElementById("read").value;
@@ -134,10 +167,9 @@ function addConfig(evt){
 		console.log("b is the blank symbol");
 		b = '#';
 	}
-	machine.addBehaviour(a,b,c,d);
+	machine.addBehaviour(a,b,c,d); // let it maintain its own state
 	// add and fill new row to machine table
-	var newRow = document.getElementById("mach").insertRow(machRows+1);
-	machRows++;
+	var newRow = document.getElementById("mach").insertRow(machine.getNumIns());
 	var x1 = newRow.insertCell(0);
 	var x2 = newRow.insertCell(1);
 	var x3 = newRow.insertCell(2);
@@ -153,10 +185,9 @@ function addManualConfig(mConf, read, actions, finalConf){
 		console.log("adding config failed");
 		return;
 	}
-	machine.addBehaviour(mConf,read,actions,finalConf);
+	machine.addBehaviour(mConf,read,actions,finalConf); // let it maintain its own state
 	// add and fill new row to machine table
-	var newRow = document.getElementById("mach").insertRow(machRows+1);
-	machRows++;
+	var newRow = document.getElementById("mach").insertRow(machine.getNumIns());
 	var x1 = newRow.insertCell(0);
 	var x2 = newRow.insertCell(1);
 	var x3 = newRow.insertCell(2);
@@ -169,16 +200,10 @@ function addManualConfig(mConf, read, actions, finalConf){
 
 }
 function runProgram(){
-	machine.execute();
-	machine.revealTape();
-}
-function clearTape(){
-	machine.tape = [];
-	machine.tapePtr = 0;
-
-	for(var i = 0; i < machine.tapeLength; i++){
-		machine.tape[i] = '#';
-		printValue(i," ");
+	// added this if statement to (try to :/) prevent multiple machines spawning :D
+	if (!machine.running){
+		machine.run();
+		//machine.revealTape();
 	}
 }
 var currCell = 0;
@@ -193,6 +218,9 @@ function highlightCell(num){
 }
 function printValue(cellNumber, char){
 	document.getElementById("tmCell"+cellNumber).innerHTML = char;
+}
+function removeAll(){
+	machine.clearIns();
 }
 function loadTuring2(){
 	addManualConfig("b","#","PeRPeRP0RRP0LL","o");
@@ -217,7 +245,14 @@ function loadBinaryCounter(){
 	addManualConfig("r","#","L","i");
 	addManualConfig("r","*","R","r");
 }
-
+function loadBouncer(){
+	// this is the only one i invented
+	addManualConfig("a","#","P0RPeRP1","b");
+	addManualConfig("b","1","L","b");
+	addManualConfig("b","e","L","b");
+	addManualConfig("b","0","R","c");
+	addManualConfig("c","e","R","b");
+}
 var thing = 0;
 var slownessOfTM = 0;
 function resolveAfter(cellNumber) {
