@@ -254,21 +254,31 @@ function loadBouncer(){
 	addManualConfig("c","e","R","b");
 }
 function loadBouncer4() {
-	//vibeoded function
-	// Setup: write left wall, move right, write right wall
-	addManualConfig("setup", "#", "PxRRRRRRRRRRRRRRRRRRPyL", "moveLeft");
+	// Setup: create bounded region
+	addManualConfig("setup", "#", "PxRRRRRRRRRRRRRRRRRRPyL", "phase_a_left");
 	
-	// Moving left: write 'b'
-	addManualConfig("moveLeft", "#", "PbL", "moveLeft");
-	addManualConfig("moveLeft", "a", "L", "moveLeft");
-	addManualConfig("moveLeft", "b", "L", "moveLeft");
-	addManualConfig("moveLeft", "x", "R", "moveRight");
+	// Phase A: write 'a' going right
+	addManualConfig("phase_a_right", "#", "PaR", "phase_a_right");
+	addManualConfig("phase_a_right", "a", "R", "phase_a_right");
+	addManualConfig("phase_a_right", "b", "R", "phase_a_right");
+	addManualConfig("phase_a_right", "y", "L", "phase_b_left");
 	
-	// Moving right: write 'a'
-	addManualConfig("moveRight", "#", "PaR", "moveRight");
-	addManualConfig("moveRight", "a", "R", "moveRight");
-	addManualConfig("moveRight", "b", "R", "moveRight");
-	addManualConfig("moveRight", "y", "L", "moveLeft");
+	// Phase B: write 'b' going left
+	addManualConfig("phase_b_left", "#", "PbL", "phase_b_left");
+	addManualConfig("phase_b_left", "a", "L", "phase_b_left");
+	addManualConfig("phase_b_left", "b", "L", "phase_b_left");
+	addManualConfig("phase_b_left", "x", "R", "phase_a_right");
+	
+	// Start heading left after setup
+	addManualConfig("phase_a_left", "#", "PaL", "phase_a_left");
+	addManualConfig("phase_a_left", "a", "L", "phase_a_left");
+	addManualConfig("phase_a_left", "x", "R", "phase_b_right");
+	
+	// Phase B going right: write 'b'
+	addManualConfig("phase_b_right", "#", "PbR", "phase_b_right");
+	addManualConfig("phase_b_right", "a", "R", "phase_b_right");
+	addManualConfig("phase_b_right", "b", "R", "phase_b_right");
+	addManualConfig("phase_b_right", "y", "L", "phase_a_left");
 }
 function loadBouncer3() {
 	addManualConfig("init", "#", "PxRRRRRRRRRRRRRRRRRRPyL", "moveLeft");
