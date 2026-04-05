@@ -270,6 +270,25 @@ function loadBouncer4() {
 	addManualConfig("moveRight", "b", "R", "moveRight");
 	addManualConfig("moveRight", "y", "L", "moveLeft");
 }
+function loadBusyBeaver() {
+	// The legendary 4-state busy beaver
+	// Writes 13 symbols before halting
+	//vibecoded function again
+	
+	addManualConfig("A", "#", "P1RP", "B");
+	addManualConfig("A", "1", "LP", "C");
+	
+	addManualConfig("B", "#", "P1L", "A");
+	addManualConfig("B", "1", "P1R", "B");
+	
+	addManualConfig("C", "#", "P1L", "D");
+	addManualConfig("C", "1", "RP", "A");
+	
+	addManualConfig("D", "#", "P1R", "D");
+	addManualConfig("D", "1", "LP", "halt");
+	
+	addManualConfig("halt", "*", "R", "halt");
+}
 var thing = 0;
 var slownessOfTM = 0;
 function resolveAfter(cellNumber) {
