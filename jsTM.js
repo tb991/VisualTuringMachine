@@ -253,28 +253,6 @@ function loadBouncer(){
 	addManualConfig("b","0","R","c");
 	addManualConfig("c","e","R","b");
 }
-function loadBouncer4() {
-	// Setup: create bounded region
-	addManualConfig("setup", "#", "PxRRRRRRRRRRRRRRRRRRPyL", "phase_a_left");
-	
-	// Phase A: write 'a' going right
-	addManualConfig("phase_a_right", "#", "PaR", "phase_a_right");
-	addManualConfig("phase_a_right", "b", "PaR", "phase_a_right");
-	addManualConfig("phase_a_right", "y", "L", "phase_b_left");
-	
-	// Phase B: write 'b' going left
-	addManualConfig("phase_b_left", "#", "PbL", "phase_b_left");
-	addManualConfig("phase_b_left", "a", "PbL", "phase_b_left");
-	addManualConfig("phase_b_left", "x", "R", "phase_a_right");
-}
-function loadBouncer3() {
-	
-	addManualConfig("a","#","P0RPeRPeRPeRPeRPeRPeRPeRPeRPeRRP1","b");
-	addManualConfig("b","1","L","b");
-	addManualConfig("b","e","L","b");
-	addManualConfig("b","0","R","c");
-	addManualConfig("c","e","R","c");
-}
 var thing = 0;
 var slownessOfTM = 0;
 function resolveAfter(cellNumber) {
