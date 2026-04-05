@@ -254,7 +254,7 @@ function loadBouncer(){
 	addManualConfig("c","e","R","b");
 }
 function loadBouncer2(){
-	addManualConfig("init","#","PsRP1RPfRRRRRRRRRRRRRR","count");
+	addManualConfig("init","#","PsRP1RPfRRRRR","count");
 	addManualConfig("fini","f","R","fini");
 	addManualConfig("fini","0","P1","fini");
 	addManualConfig("fini","1","R","fini");
