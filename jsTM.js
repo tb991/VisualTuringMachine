@@ -253,6 +253,30 @@ function loadBouncer(){
 	addManualConfig("b","0","R","c");
 	addManualConfig("c","e","R","b");
 }
+function loadBouncer2(){
+	addManualConfig("init","#","PsRP1RPfRRRRRRRRRRRRRR","count");
+	addManualConfig("fini","f","R","fini");
+	addManualConfig("fini","0","P1","fini");
+	addManualConfig("fini","1","R","fini");
+	addManualConfig("fini","#","","spin");
+	
+	
+	addManualConfig("count","#","","z");
+	addManualConfig("z","#","P0","i");
+	addManualConfig("i","0","P1","r");
+	addManualConfig("i","1","P0L","i");
+	addManualConfig("i","f","","fini");
+	addManualConfig("i","#","P1","r");
+	addManualConfig("r","#","L","i");
+	addManualConfig("r","*","R","r");
+	
+	addManualConfig("spin","#","","a");
+	addManualConfig("a","#","P0RPeRP1","b");
+	addManualConfig("b","1","L","b");
+	addManualConfig("b","e","L","b");
+	addManualConfig("b","0","R","c");
+	addManualConfig("c","e","R","b");
+}
 var thing = 0;
 var slownessOfTM = 0;
 function resolveAfter(cellNumber) {
@@ -282,4 +306,3 @@ function medium(){
 function fast(){
         slownessOfTM = 0;
 }
-
