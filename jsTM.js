@@ -271,24 +271,25 @@ function loadBouncer4() {
 	addManualConfig("moveRight", "y", "L", "moveLeft");
 }
 function loadBusyBeaver() {
-	// Busy beaver adapted to work with configuration scanning
-	// Each state must handle all possible tape symbols gracefully
+	// Classic 4-state busy beaver
+	// Writes 13 ones, then halts by spinning in a safe zone
 	
-	addManualConfig("A", "#", "P1R", "A");
-	addManualConfig("A", "1", "LP", "B");
-	addManualConfig("A", "0", "R", "A");
+	addManualConfig("A", "#", "P1R", "B");
+	addManualConfig("A", "1", "LP", "C");
 	
-	addManualConfig("B", "#", "P1L", "B");
-	addManualConfig("B", "1", "P1R", "C");
-	addManualConfig("B", "0", "L", "B");
+	addManualConfig("B", "#", "P1L", "A");
+	addManualConfig("B", "1", "P1R", "B");
 	
-	addManualConfig("C", "#", "P1L", "C");
-	addManualConfig("C", "1", "RP", "D");
-	addManualConfig("C", "0", "R", "C");
+	addManualConfig("C", "#", "P1L", "D");
+	addManualConfig("C", "1", "RP", "A");
 	
 	addManualConfig("D", "#", "P1R", "D");
-	addManualConfig("D", "1", "LP", "A");
-	addManualConfig("D", "0", "L", "D");
+	addManualConfig("D", "1", "LP", "halt");
+	
+	// Halt state: spins forever in one place, writing nothing
+	addManualConfig("halt", "#", "R", "halt");
+	addManualConfig("halt", "1", "L", "halt");
+	addManualConfig("halt", "h", "R", "halt");
 }
 var thing = 0;
 var slownessOfTM = 0;
