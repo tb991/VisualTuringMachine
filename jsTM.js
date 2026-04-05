@@ -253,6 +253,23 @@ function loadBouncer(){
 	addManualConfig("b","0","R","c");
 	addManualConfig("c","e","R","b");
 }
+function loadBouncer4() {
+	//vibeoded function
+	// Setup: write left wall, move right, write right wall
+	addManualConfig("setup", "#", "PxRRRRRRRRRRRRRRRRRRPyL", "moveLeft");
+	
+	// Moving left: write 'b'
+	addManualConfig("moveLeft", "#", "PbL", "moveLeft");
+	addManualConfig("moveLeft", "a", "L", "moveLeft");
+	addManualConfig("moveLeft", "b", "L", "moveLeft");
+	addManualConfig("moveLeft", "x", "R", "moveRight");
+	
+	// Moving right: write 'a'
+	addManualConfig("moveRight", "#", "PaR", "moveRight");
+	addManualConfig("moveRight", "a", "R", "moveRight");
+	addManualConfig("moveRight", "b", "R", "moveRight");
+	addManualConfig("moveRight", "y", "L", "moveLeft");
+}
 var thing = 0;
 var slownessOfTM = 0;
 function resolveAfter(cellNumber) {
