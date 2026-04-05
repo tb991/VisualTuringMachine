@@ -271,25 +271,20 @@ function loadBouncer4() {
 	addManualConfig("moveRight", "y", "L", "moveLeft");
 }
 function loadBusyBeaver() {
-	// Classic 4-state busy beaver
-	// Writes 13 ones, then halts by spinning in a safe zone
-	
 	addManualConfig("A", "#", "P1R", "B");
-	addManualConfig("A", "1", "LP", "C");
+	addManualConfig("A", "1", "L", "C");
 	
 	addManualConfig("B", "#", "P1L", "A");
 	addManualConfig("B", "1", "P1R", "B");
 	
 	addManualConfig("C", "#", "P1L", "D");
-	addManualConfig("C", "1", "RP", "A");
+	addManualConfig("C", "1", "R", "A");
 	
 	addManualConfig("D", "#", "P1R", "D");
-	addManualConfig("D", "1", "LP", "halt");
+	addManualConfig("D", "1", "L", "halt");
 	
-	// Halt state: spins forever in one place, writing nothing
 	addManualConfig("halt", "#", "R", "halt");
 	addManualConfig("halt", "1", "L", "halt");
-	addManualConfig("halt", "h", "R", "halt");
 }
 var thing = 0;
 var slownessOfTM = 0;
