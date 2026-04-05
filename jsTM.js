@@ -268,17 +268,12 @@ function loadBouncer4() {
 	addManualConfig("phase_b_left", "x", "R", "phase_a_right");
 }
 function loadBouncer3() {
-	addManualConfig("init", "#", "PxRRRRRRRRRRRRRRRRRRPyL", "moveLeft");
 	
-	addManualConfig("moveLeft", "#", "PbL", "moveLeft");
-	addManualConfig("moveLeft", "a", "L", "moveLeft");
-	addManualConfig("moveLeft", "b", "L", "moveLeft");
-	addManualConfig("moveLeft", "x", "R", "moveRight");
-	
-	addManualConfig("moveRight", "#", "PaR", "moveRight");
-	addManualConfig("moveRight", "a", "R", "moveRight");
-	addManualConfig("moveRight", "b", "R", "moveRight");
-	addManualConfig("moveRight", "y", "L", "moveLeft");
+	addManualConfig("a","#","P0RPeRPeRPeRPeRPeRPeRPeRPeRPeRRP1","b");
+	addManualConfig("b","1","L","b");
+	addManualConfig("b","e","L","b");
+	addManualConfig("b","0","R","c");
+	addManualConfig("c","e","R","c");
 }
 var thing = 0;
 var slownessOfTM = 0;
