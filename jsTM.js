@@ -271,20 +271,24 @@ function loadBouncer4() {
 	addManualConfig("moveRight", "y", "L", "moveLeft");
 }
 function loadBusyBeaver() {
-	// Simplified busy beaver that creates an interesting pattern
-	// and doesn't get stuck
+	// Busy beaver adapted to work with configuration scanning
+	// Each state must handle all possible tape symbols gracefully
 	
-	addManualConfig("A", "#", "P1R", "B");
-	addManualConfig("A", "1", "LP", "C");
+	addManualConfig("A", "#", "P1R", "A");
+	addManualConfig("A", "1", "LP", "B");
+	addManualConfig("A", "0", "R", "A");
 	
-	addManualConfig("B", "#", "P1L", "A");
-	addManualConfig("B", "1", "P1R", "B");
+	addManualConfig("B", "#", "P1L", "B");
+	addManualConfig("B", "1", "P1R", "C");
+	addManualConfig("B", "0", "L", "B");
 	
-	addManualConfig("C", "#", "P1L", "D");
-	addManualConfig("C", "1", "RP", "A");
+	addManualConfig("C", "#", "P1L", "C");
+	addManualConfig("C", "1", "RP", "D");
+	addManualConfig("C", "0", "R", "C");
 	
 	addManualConfig("D", "#", "P1R", "D");
-	addManualConfig("D", "1", "LP", "C");
+	addManualConfig("D", "1", "LP", "A");
+	addManualConfig("D", "0", "L", "D");
 }
 var thing = 0;
 var slownessOfTM = 0;
