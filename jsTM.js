@@ -270,22 +270,6 @@ function loadBouncer4() {
 	addManualConfig("moveRight", "b", "R", "moveRight");
 	addManualConfig("moveRight", "y", "L", "moveLeft");
 }
-function loadBusyBeaver() {
-	addManualConfig("A", "#", "P1R", "B");
-	addManualConfig("A", "1", "L", "C");
-	
-	addManualConfig("B", "#", "P1L", "A");
-	addManualConfig("B", "1", "P1R", "B");
-	
-	addManualConfig("C", "#", "P1L", "D");
-	addManualConfig("C", "1", "R", "A");
-	
-	addManualConfig("D", "#", "P1R", "D");
-	addManualConfig("D", "1", "L", "halt");
-	
-	addManualConfig("halt", "#", "R", "halt");
-	addManualConfig("halt", "1", "L", "halt");
-}
 var thing = 0;
 var slownessOfTM = 0;
 function resolveAfter(cellNumber) {
