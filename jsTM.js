@@ -270,6 +270,22 @@ function loadBouncer4() {
 	addManualConfig("moveRight", "b", "R", "moveRight");
 	addManualConfig("moveRight", "y", "L", "moveLeft");
 }
+function loadBouncer3() {
+	// Initialize: set left wall marker and move to starting position
+	addManualConfig("init", "#", "PxR", "moveRight");
+	
+	// Moving right: write 'a', keep going until we hit right wall 'y'
+	addManualConfig("moveRight", "#", "PaR", "moveRight");
+	addManualConfig("moveRight", "a", "R", "moveRight");
+	addManualConfig("moveRight", "b", "R", "moveRight");
+	addManualConfig("moveRight", "y", "L", "moveLeft");
+	
+	// Moving left: write 'b', keep going until we hit left wall 'x'
+	addManualConfig("moveLeft", "#", "PbL", "moveLeft");
+	addManualConfig("moveLeft", "a", "L", "moveLeft");
+	addManualConfig("moveLeft", "b", "L", "moveLeft");
+	addManualConfig("moveLeft", "x", "R", "moveRight");
+}
 var thing = 0;
 var slownessOfTM = 0;
 function resolveAfter(cellNumber) {
